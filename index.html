@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+	<head>
+		<title>Decoder</title>
+		<style type="text/css">
+		button {
+			border-radius: 8px;
+			user-select: none;
+			-moz-user-select: none;
+			-khtml-user-select: none;
+			-webkit-user-select: none;
+			-o-user-select: none;
+			-ms-user-select: none;			
+			font-size: 2vw;
+			border: 0;
+		}
+		button.show {
+			margin-top: 1%;
+		}
+			
+		button:hover {
+			background-color: #999999;
+			color: black;
+		}
+		
+		button:focus {outline:0;}
+
+		input {
+			font-size: 1vw;
+			color: black;
+			user-select: none;
+			-moz-user-select: none;
+			-khtml-user-select: none;
+			-webkit-user-select: none;
+			-o-user-select: none;
+			-ms-user-select: none;			
+		}
+   		 </style>
+	</head>
+	
+	<body style="display:block; margin:5%;">
+    <div style="display: block; text-align:center; margin-top:15%;">
+        <input id="txtin" style="width:50%;"></input>
+    </div> 
+    <div style="display: block; text-align:center; margin-top:5%;">
+        <button onclick="decode()" style="width:10%;">Decode</button>
+    </div>
+    <div style="display: block; text-align:center; margin-top:5%;">
+        <input disabled id="res" style="width:50%;"></input>
+    </div>
+		<script type="text/javascript" src="dict1.js" ></script>
+
+	
+		<script>
+            var input = ""
+            
+            function decode()
+            {
+                /*var dict_letters = letters(dict)
+                input = document.getElementById("txtin").value.split(" ");
+                var input_letters = letters(input)
+                var answer = "";
+                
+                for (var i = 0; i < input_letters[1].length; i++) {
+                    for (var j = 0; j < input.length; j++) {
+                        var lidx = input[j].findIndex(elem => elem==input_letters[i]);
+                        if (lidx.length > 0) {
+                            for (var k = 0; k < dict_letters[1].length; k++) {
+                                dict_cpy = [...dict];
+                                for (var l = dict_cpy.length-1; l >= 0; l--) {
+                                    if (arrcomp(lidx, dict_cpy[l].findIndex(elem => elem==dict_letters[k])) == false) dict_cpy.splice(l,1);
+                                }
+                                // SWAP k AND j LOOPS
+                            }
+                        }                        
+                    }
+                }
+				*/
+				input = document.getElementById("txtin").value.split(" ");
+				if (input == "encoded_message") document.getElementById("res").value = "Дианочка, не злись, ты топ ♥";
+            }
+            
+            function letters(arr)
+            {
+                var mas = [];
+                mas[0] = new Array(0);
+                mas[1] = new Array(0);
+                
+                // filling mas
+                for(var i = 0; i < arr.length; i++) {
+                    for(var j = 0; j < arr[i].length; j++) {
+                        var letter = arr[i][j].toLowerCase();
+                        var idx = mas[0].indexOf(letter)
+                        if (idx == -1) {
+                            mas[0][mas[0].length] = letter;
+                            mas[1][mas[1].length] = 1;
+                        }
+                        else mas[1][idx]++;
+                    }
+                }
+                
+                // sorting mas
+                for (var i = 0; i < mas[0].length; i++) {
+                    for (var j = 0; j < mas[0].length-i; j++) {
+                        if (mas[1][j] < mas[1][j+1]) {
+                            mas[1][j] ^= mas[1][j+1];
+                            mas[1][j+1] ^= mas[1][j];
+                            mas[1][j] ^= mas[1][j+1];
+                            var chr = mas[0][j];
+                            mas[0][j] = mas[0][j+1];                            
+                            mas[0][j+1] = chr;
+                        }
+                    }
+                    
+                }
+                return mas;
+            }
+            
+            function arrcomp(array1, array2)
+            {
+                return (array1.length === array2.length && array1.every(function(value, index) { return value === array2[index]}));
+            }
+            
+	</script>
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
